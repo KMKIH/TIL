@@ -1,0 +1,18 @@
+# 2026-07-03
+
+## 오늘 한 일
+- 코딩테스트
+    - car-fleet
+        - https://neetcode.io/problems/car-fleet/question
+    - kth-largest-integer-in-a-stream
+        - https://neetcode.io/problems/kth-largest-integer-in-a-stream/question
+
+## 정리
+- car-fleet
+    - 거속시 공식을 잊지말자
+        - 거리 = 속도 * 시간
+        - 속도 = 거리 / 시간
+        - 시간 = 거리 / 속도
+    - 거리와 속도로 도달시간을 계산한다
+- kth-largest-integer-in-a-stream
+    - K개의 크기를 유지하는 MinHeap
