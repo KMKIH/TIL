@@ -1,0 +1,19 @@
+# 2026-07-04
+
+## 오늘 한 일
+- 코딩테스트
+    - house-robber
+        - https://neetcode.io/problems/house-robber/question
+- 프로젝트
+    - NoiseCanceler
+        - 출시 전 폴리싱 작업
+    - 메커톤
+        - 보상 시스템 구현
+        - 노드 등장 확률 시스템 수정
+
+## 정리
+- house-robber
+    - 간단한 DP 문제, 굳이 dp 배열을 사용하지 않아되 되었을듯
+        ```cpp
+        nums[i] += max(nums[i-2], nums[i-3]);
+        ```
