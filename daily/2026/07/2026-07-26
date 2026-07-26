@@ -1,0 +1,24 @@
+# 2026-07-26
+
+## 오늘 한 일
+- CS 공부
+    - RPC
+
+## 정리
+### CS 공부
+- **RPC**: Remote Procedure Call (원격 프로시져 콜)
+    - Procedure란?
+        - 한국어로는 절차
+        - 일련의 명령을 수행하는 코드 묶음 (함수, 서브루틴, 메서드)
+    - Procedure(절차)와 Funtion(함수)
+        (둘은 거의 비슷)
+        - Procedure: 특정 작업을 수행하는 데 초점
+        - Fuction: 값을 계산해서 반환하는 데 초점
+
+- **RPC의 종류**
+    - Server RPC
+        - 클라이언트 -> 서버
+    - Client RPC
+        - 서버 -> 특정 클라이언트
+    - Multicast RPC
+        - 서버 -> 여러 클라이언트
