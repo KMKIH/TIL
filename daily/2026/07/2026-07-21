@@ -1,0 +1,19 @@
+# 2026-07-21
+
+## 오늘 한 일
+- 코딩테스트
+    - Valid Palindrome
+        - https://leetcode.com/problems/valid-palindrome/description/
+    - MinStack
+        - https://leetcode.com/problems/min-stack/
+
+## 정리
+### 코딩 테스트
+- Valid Palindrome
+    - string의 시작과 끝에서부터 비교한다
+- Min Stack
+    - 2개의 Stack을 유지한다
+        - 모든 데이터를 저장하는 Stack
+        - 단조 감소 상태를 유지하는 MinStack
+    - 다른 방법
+        - Stack 저장 시 pair의 형태로 (현재값, 이전의 최솟값)을 저장한다
