@@ -1,0 +1,12 @@
+# 2026-07-24
+
+## 오늘 한 일
+- 코딩테스트
+    - Best Time to Buy and Sell Stock
+        - https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
+## 정리
+### 코딩 테스트
+- Best Time to Buy and Sell Stock
+    - 단조 증가 스택으로 풀었음
+    - 근데 그렇게 안풀고 그냥 순회하면서 최소값과 최대이익 저장해도 될듯
