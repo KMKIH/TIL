@@ -1,0 +1,24 @@
+# 2026-07-15
+
+## 오늘 한 일
+- 코딩테스트
+    - Single Number
+        - https://neetcode.io/problems/single-number/question
+- 프로젝트
+    - NoiseCancler
+        - 출시 전 마지막 수정
+
+## 정리
+### 코딩 테스트
+- Single Number
+    - 초기 접근:
+        1. 정렬
+        2. 앞뒤 비교하면서 Single Number 찾기
+    - 비트 연산자를 통한 접근:
+        - **XOR** 사용
+            ```cpp
+            a ^ a = 0
+            a ^ 0 = a
+            // XOR은 연산 순서가 바뀌어도 상관이 없다
+            ```
+        - 모든 원소에 대해 XOR을 진행하면 Single Number가 나온다
