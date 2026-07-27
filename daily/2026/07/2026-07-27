@@ -1,0 +1,137 @@
+# 2026-07-27
+
+## 오늘 한 일
+- 코딩테스트
+    - Find if Path Exists in Graph
+        - https://leetcode.com/problems/find-if-path-exists-in-graph/description/
+    - Cheapest Flights Within K Stops
+        - https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
+- 프로젝트
+    - 판정 이펙트 추가 구현 (기획자에게 넘기는 용도)
+    - 백로그 시스템
+
+## 정리
+### 코딩테스트
+- Find if Path Exists in Graph
+    > 이전에 풀었던 문제였다. 오늘은 가장 먼저 떠오른 방법인 dfs로 해결하였다.
+    - **dfs**
+        - source에서 dfs를 돌려 destination에 도달하였는지를 확인
+        - 시간복잡도 **O(V+E)**
+        - 기존 풀이
+            ```cpp
+            class Solution {
+            private:
+                vector<bool> visited;
+                vector<vector<int>> adj;
+                void dfs(int c){
+                    visited[c] = true;
+                    for(int i = 0;i < adj[c].size();i++){
+                        int next = adj[c][i];
+                        if(visited[next]) continue;
+                        dfs(next);
+                    }
+                }
+            public:
+                bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+                    visited = vector<bool>(n,false);
+                    adj = vector<vector<int>>(n,vector<int>());
+
+                    for(auto edge : edges){
+                        int a = edge[0];
+                        int b = edge[1];
+                        adj[a].push_back(b);
+                        adj[b].push_back(a);
+                    }
+
+                    dfs(source);
+                    return visited[destination];
+                }
+            };
+            ```
+        1. 해당 코드 최적화
+            1. cpp에서 foreach는 복사본을 생성한다. 복사본을 생성하지 않고 참조로 받도록 수정했다.
+                ```cpp
+                for(auto edge : edges)
+                =>
+                for(const auto& edge : edges)
+                ```
+                - const : 참조한 원본 수정 방지용
+                - & : 참조
+            2. destination에 도달하면 이후로의 탐색은 불필요하다 dfs를 중단시키도록 수정
+                ```cpp
+                void dfs(int c){
+                    visited[c] = true;
+                    for(int i = 0;i < adj[c].size();i++){
+                        int next = adj[c][i];
+                        if(visited[next]) continue;
+                        dfs(next);
+                    }
+                }
+                =>
+                bool dfs(int c, int d){
+                    if(c == d) return true;
+                    visited[c] = true;
+                    for(int n : adj[c]){
+                        if(visited[n]) continue;
+                        if(dfs(n, d)) return true;
+                    }
+                    return false;
+                }
+                ```
+    ---
+    - Union-Find (예전에 풀었던 방법)
+        - 시간복잡도에 대하여...
+            - 기본형
+                - 최악의 경우 O(N)
+            - 경로 압축 + 랭크 기반 합치기 최적화
+                - O(α(N))이라고 한다..
+                    - α(N): 역 아커만 함수
+                        - 입력값 (n)이 아무리 커져도(예: 우주에 있는 모든 원자의 개수보다 큰 수여도) 그 결과값이 보통 4나 5를 넘지 않는 함수
+            - 둘 중 하나만 적용한다면,
+                - 최악의 경우 O(logN)
+        ```cpp
+        class Solution {
+        private:
+            vector<int> parent;
+            vector<int> rank;
+
+            void init(int n){
+                parent = vector<int>(n);
+                for(int i = 0;i<n;i++) parent[i] = i;
+                rank = vector<int>(n,1);
+            }
+
+            int find(int u){
+                if(u == parent[u]) return u;
+                return parent[u] = find(parent[u]);
+            }
+            void merge(int u, int v){
+                u = find(u); v= find(v);
+                if(u == v) return;
+                if(rank[u] > rank[v])swap(u,v);
+                parent[u] = v;
+                if(rank[u]==rank[v])rank[v]++;
+            }
+
+        public:
+            bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+                init(n);
+                for(const auto& edge : edges){
+                    int a = edge[0];
+                    int b = edge[1];
+                    merge(a,b);
+                }
+                return find(source) == find(destination);
+            }
+        };
+        ```
+    - Cheapest Flights Within K Stops
+        - 가중치 그래프 + 조건(K번 이상 경유하면 안됨) + 최단거리
+        1. 가중치 그래프 + 최단거리 = Dijkstra
+        2. 이때 최단거리를 사용한 항공편 수에 따라 다르게 저장한다
+            - dist[node][count]
+---
+### 프로젝트
+- 백로그 시스템
+    - 현재 Dialogue시스템이 파편화되어 있어서 이를 종합하기에 힘들었다....
+    - 규칙을 정하고, 규칙하에 파편화된 데이터를 모으도록 시스템을 구성했다
